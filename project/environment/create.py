@@ -20,11 +20,12 @@ def generate_random_string(length: int = 5) -> str:
     return random_string
 
 
-def create(root: str = "./") -> None:
+def create(root: str = "./", python_version: str = None) -> None:
     """
     Creates a Conda environment for a project and writes environment details to files.
 
     Args:
+        python_version:
         root (str): The root directory where environment files will be created. Defaults to the current directory.
 
     Writes:
@@ -34,7 +35,7 @@ def create(root: str = "./") -> None:
     Reads:
         - Pip packages to be installed from e-pip-packages.env
     """
-    python_version = platform.python_version()  # Get the current Python version
+    python_version = python_version if python_version is not None else platform.python_version()  # Get the current Python version
     env_name = f"syntheticDataset-{generate_random_string()}"  # Generate a unique environment name
 
     print(f"\n\nWorking on {root}")
