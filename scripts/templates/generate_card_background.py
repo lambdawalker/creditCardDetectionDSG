@@ -2,7 +2,7 @@ import random
 
 from PIL import Image
 
-from scripts.color.generate_pallet import ColorPalette
+from scripts.color.ColorPallet import ColorPalette
 from scripts.log.card_log import CardLog
 from scripts.templates.generators.backgorund.draw_base import draw_fill_background_functions, draw_fill_background_functions_all
 from scripts.templates.generators.backgorund.draw_details import draw_details_functions

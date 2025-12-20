@@ -17,3 +17,5 @@ field_generators = {
     # Images
     "paymentNetworkLogo": get_random_payment_network_logo,
 }
+
+

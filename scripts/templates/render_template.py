@@ -6,7 +6,7 @@ import PIL.Image
 from PIL import ImageDraw, ImageFont
 
 from scripts.color.conversion import rgb_to_hex
-from scripts.color.generate_pallet import ColorPalette
+from scripts.color.ColorPallet import ColorPalette
 from scripts.color.text_color import best_text_color_from_palette
 from scripts.log.card_log import CardLog
 from scripts.templates.draw_text import draw_left_justified_text, draw_right_justified_text
