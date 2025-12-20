@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="63.99733"
+   height="64.001328"
+   viewBox="0 0 16.932627 16.933684"
+   version="1.1"
+   id="svg8831"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="Ameriprise_Financial_logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs8825">
+    <clipPath
+       id="clipPath5106"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5104"
+         d="M 0,0 H 594 V 774 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath5082"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5080"
+         d="M 0,0 H 594 V 774 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath5026"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5024"
+         d="M 0,0 H 594 V 774 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath5010"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5008"
+         d="M 0,0 H 594 V 774 H 0 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8991795"
+     inkscape:cx="-75.021226"
+     inkscape:cy="45.185198"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     units="px"
+     inkscape:window-width="5098"
+     inkscape:window-height="2032"
+     inkscape:window-x="190"
+     inkscape:window-y="190"
+     inkscape:window-maximized="0"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1" />
+  <metadata
+     id="metadata8828">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-25.219464,56.469198)">
+    <path
+       d="m 38.807758,-42.889371 -3.618442,-1.496483 -1.503538,3.624439 -1.500364,-3.624439 -3.620911,1.496483 1.503186,-3.619147 -3.626203,-1.502481 3.626203,-1.501422 -1.503186,-3.6195 3.620911,1.496131 1.500364,-3.619147 1.503538,3.619147 -0.01834,0.0095 3.636786,-1.505656 -1.497542,3.6195 3.623734,1.501422 -3.624792,1.502481 z m -5.12198,-13.579827 c -4.674659,0 -8.466314,3.790597 -8.466314,8.466313 0,4.677128 3.791655,8.467372 8.466314,8.467372 4.675716,0 8.466313,-3.790244 8.466313,-8.467372 0,-4.675716 -3.790597,-8.466313 -8.466313,-8.466313"
+       style="fill:#0b3865;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.352778"
+       id="path5014"
+       inkscape:connector-curvature="0" />
+    <path
+       d="m 38.042513,-52.366192 -7.436203,3.080103 3.07975,1.275291 1.275292,3.076928 z"
+       style="fill:#0b3865;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.352778"
+       id="path5018"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
