@@ -15,16 +15,6 @@
       "height": 0.10569105691056911
     },
     {
-      "type": "card_name",
-      "originalText": "BankAmericard",
-      "justified": "right",
-      "coordinates": [
-        0.9123711340206185,
-        0.3943089430894309
-      ],
-      "height": 0.056910569105691054
-    },
-    {
       "type": "benefit",
       "originalText": "CASH REWARDS",
       "justified": "right",
@@ -33,33 +23,6 @@
         0.4349593495934959
       ],
       "height": 0.08130081300813008
-    },
-    {
-      "type": "creditCardNumber",
-      "originalText": "4000     2331     5875     9123",
-      "coordinates": [
-        0.08878350515463918,
-        0.5772357723577236
-      ],
-      "height": 0.15569105691056911
-    },
-    {
-      "type": "expirationDate",
-      "originalText": "12/18",
-      "coordinates": [
-        0.5489690721649485,
-        0.7195121951219512
-      ],
-      "height": 0.06504065040650407
-    },
-    {
-      "type": "text",
-      "originalText": "VALID\nTHRU",
-      "coordinates": [
-        0.4789690721649485,
-        0.7195121951219512
-      ],
-      "height": 0.03004065040650407
     },
     {
       "type": "paymentNetworkName",
@@ -80,15 +43,6 @@
         0.9161788617886179
       ],
       "height": 0.07317073170731707
-    },
-    {
-      "type": "userName",
-      "originalText": "CARDHOLDER",
-      "coordinates": [
-        0.08878350515463918,
-        0.8382926829268293
-      ],
-      "height": 0.0975609756097561
     }
   ],
   "formFactor": {
