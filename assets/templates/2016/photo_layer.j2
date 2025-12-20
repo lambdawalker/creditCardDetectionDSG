@@ -1,0 +1,23 @@
+{% with id = gen.random.number(max=701) %}
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>INE Credencial (Simulación)</title>
+        <link rel="stylesheet" href="localhost.disk://templates/2016/style.css">
+    </head>
+    <body>
+    <div class="card">
+        <header class="card-header">
+        </header>
+        <main class="card-body">
+            <div class="photo-section">
+                <img class="main-photo" src="localhost.disk://images/id_photo/{{ id }}.png" capture="true" alt="Photo">
+            </div>
+            <img class="small-photo" src="localhost.disk://images/id_photo/{{ id }}.png" capture="true" alt="Photo">
+        </main>
+    </div>
+    </body>
+    </html>
+{% endwith %}
