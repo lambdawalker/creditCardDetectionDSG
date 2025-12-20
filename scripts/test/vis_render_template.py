@@ -1,6 +1,6 @@
 import os.path
 
-from scripts.color.generate_pallet import ColorPalette
+from scripts.color.ColorPallet import ColorPalette
 from scripts.templates.render_template import render_template
 
 

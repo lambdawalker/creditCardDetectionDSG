@@ -1,6 +1,6 @@
 from PIL import Image
 
-from scripts.color.generate_pallet import ColorPalette
+from scripts.color.ColorPallet import ColorPalette
 from scripts.generators.backgorund.draw_ordered_triangles import draw_ordered_triangles
 from scripts.generators.backgorund.generate_base import ordered_triangles
 from scripts.generators.backgorund.generate_random_contrasting_background import generate_random_contrasting_background

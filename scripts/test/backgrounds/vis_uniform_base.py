@@ -1,5 +1,5 @@
 from scripts.color.generate_color import generate_random_color
-from scripts.color.generate_pallet import ColorPalette
+from scripts.color.ColorPallet import ColorPalette
 from scripts.color.vis import visualize_palette
 from scripts.generators.backgorund.generate_base import ordered_triangles
 from scripts.generators.backgorund.generate_random_uniform_background import generate_random_uniform_background

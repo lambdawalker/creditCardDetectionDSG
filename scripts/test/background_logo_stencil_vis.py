@@ -1,4 +1,4 @@
-from scripts.color.generate_pallet import ColorPalette
+from scripts.color.ColorPallet import ColorPalette
 from scripts.templates.convert_svg_to_png import prepare_svg_as_stencil
 
 

@@ -1,6 +1,6 @@
 from PIL import Image
 
-from scripts.color.generate_pallet import ColorPalette
+from scripts.color.ColorPallet import ColorPalette
 from scripts.generators.backgorund.draw_ordered_triangles import draw_ordered_triangles
 
 if __name__ == "__main__":
