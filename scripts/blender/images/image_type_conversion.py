@@ -3,8 +3,6 @@ import numpy as np
 from PIL import Image
 
 
-
-
 def load_image_from_file(file_path):
     return bpy.data.images.load(file_path)
 
@@ -13,16 +11,9 @@ def convert_pil_to_blender_image(pil_image, image_name="TempImage"):
     pil_image = pil_image.convert('RGBA')
     width, height = pil_image.size
     pixel_data = np.array(pil_image).flatten()
-
-    # Create a new image in Blender
     blender_image = bpy.data.images.new(image_name, width=width, height=height, alpha=True)
-
-    # Correct horizontal mirror by reversing each row
     corrected_pixel_data = np.flipud(pixel_data.reshape((height, width, 4))).flatten()
-
-    # Assign pixel data to the Blender image
-    blender_image.pixels = [v / 255 for v in corrected_pixel_data]
-
+    blender_image.pixels = (corrected_pixel_data / 255.0).tolist()
     return blender_image
 
 
