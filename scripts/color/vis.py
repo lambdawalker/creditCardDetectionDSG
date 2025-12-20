@@ -2,7 +2,8 @@ import matplotlib
 from matplotlib import pyplot as plt
 
 from scripts.color.conversion import rgb_to_hex
-from scripts.color.generate_pallet import rgb_to_hls, ColorPalette
+from scripts.color.generate_pallet import rgb_to_hls
+from scripts.color.ColorPallet import ColorPalette
 
 matplotlib.use('TkAgg')
 

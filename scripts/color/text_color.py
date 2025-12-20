@@ -1,6 +1,6 @@
 import math
 
-from scripts.color.generate_pallet import ColorPalette
+from scripts.color.ColorPallet import ColorPalette
 
 
 def luminance(r, g, b):
@@ -45,7 +45,6 @@ def best_text_color_from_palette(pallet: ColorPalette):
 
     colors = [black, white]
 
-    # Find the best contrast ratio
     best_color = None
 
     primary = pallet.primary
