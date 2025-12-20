@@ -326,7 +326,7 @@ def generate_credit_card(**kwargs):
     return generate_random_credit_card_number()[1]
 
 
-def generate_payment_network_logo(**kwargs):
+def generate_payment_network(**kwargs):
     return generate_random_credit_card_number()[0]
 
 

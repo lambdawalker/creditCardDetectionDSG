@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 
 from scripts.color.generate_color import generate_random_color
-from scripts.templates.generators.flatten import flatten
+from scripts.common.flatten import flatten
 
 
 def remove_corners_at_random(points):

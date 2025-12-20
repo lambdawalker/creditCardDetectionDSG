@@ -4,9 +4,15 @@ import random
 import numpy as np
 from PIL import ImageDraw, Image
 
+from scripts.common.file import path_from_root, get_random_file
+from scripts.common.svg_stencil import prepare_svg_as_stencil, apply_stencil
+from scripts.templates.generators.backgorund.common import get_width_dependent_param
+
 
 def draw_curved_lines(image, primary_colors, complementary_colors, **parameters):
     color = random.choice(primary_colors)
+    color = (*color, parameters.get("opacity", 255))
+
     width, height = image.size
     transparent_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(transparent_layer, "RGBA")
@@ -49,6 +55,8 @@ def draw_curved_lines(image, primary_colors, complementary_colors, **parameters)
 
 def draw_random_rectangles(image, primary_colors, complementary_colors, **parameters):
     color = random.choice(primary_colors)
+    color = (*color, parameters.get("opacity", 255))
+
     width, height = image.size
     transparent_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(transparent_layer, "RGBA")
@@ -75,6 +83,8 @@ def draw_random_rectangles(image, primary_colors, complementary_colors, **parame
 
 def draw_random_spots(image, primary_colors, complementary_colors, **parameters):
     color = random.choice(primary_colors)
+    color = (*color, parameters.get("opacity", 255))
+
     width, height = image.size
     transparent_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(transparent_layer, "RGBA")
@@ -99,6 +109,7 @@ def draw_random_spots(image, primary_colors, complementary_colors, **parameters)
 
 def draw_random_triangles(image, primary_colors, complementary_colors, **parameters):
     color = random.choice(primary_colors)
+    color = (*color, parameters.get("opacity", 255))
 
     width, height = image.size
     transparent_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
@@ -124,6 +135,8 @@ def draw_random_triangles(image, primary_colors, complementary_colors, **paramet
 
 def draw_parallel_lines(image, primary_colors, complementary_colors, **parameters):
     color = random.choice(primary_colors)
+    color = (*color, parameters.get("opacity", 255))
+
     width, height = image.size
     transparent_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(transparent_layer, 'RGBA')
@@ -149,10 +162,61 @@ def draw_parallel_lines(image, primary_colors, complementary_colors, **parameter
     return image
 
 
+def draw_solid_big_logo(image, primary_colors, complementary_colors, **parameters):
+    color = random.choice(complementary_colors)
+    image_b = Image.new("RGBA", image.size, color)
+
+    stencils_path = path_from_root("./assets/images/logo_stencil")
+    svg_path = get_random_file(stencils_path)
+
+    width, height = image.size
+    stencil, bounding_box = prepare_svg_as_stencil(svg_path, width, height)
+
+    if stencil is not None:
+        result_image = apply_stencil(image, image_b, stencil)
+        return result_image
+    else:
+        raise ValueError(f"Failed to apply stencil. {svg_path}")
+
+
+def draw_random_circles(image, primary_colors, complementary_colors, **parameters):
+    color = random.choice(primary_colors)
+    color = (*color, parameters.get("opacity", 255))
+
+    width, height = image.size
+    transparent_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(transparent_layer, "RGBA")
+
+    def random_spot_size():
+        return random.randint(height // 30, height // 10)
+
+    num_spots = random.randint(10, 100)
+
+    thickness = get_width_dependent_param(image, 0.8, 3, 'thickness', **parameters)
+
+    for _ in range(num_spots):
+        spot_size = random_spot_size()
+        x = random.randint(0, width)
+        y = random.randint(0, height)
+        draw.ellipse(
+            [(x - spot_size, y - spot_size), (x + spot_size, y + spot_size)],
+            fill=None,
+            outline=color,
+            width=thickness
+        )
+
+    image.paste(transparent_layer, (0, 0), transparent_layer)
+    return image
+
+
+
+
 draw_details_functions = {
     'draw_random_rectangles': draw_random_rectangles,
     'draw_curved_lines': draw_curved_lines,
     'draw_random_spots': draw_random_spots,
     'draw_random_triangles': draw_random_triangles,
-    'draw_parallel_lines': draw_parallel_lines
+    'draw_parallel_lines': draw_parallel_lines,
+    'draw_solid_big_logo': draw_solid_big_logo,
+    'draw_random_circles': draw_random_circles,
 }

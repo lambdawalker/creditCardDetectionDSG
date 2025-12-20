@@ -8,16 +8,16 @@ from PIL import ImageDraw, ImageFont
 from scripts.color.conversion import rgb_to_hex
 from scripts.color.generate_pallet import ColorPalette
 from scripts.color.text_color import best_text_color_from_palette
+from scripts.common.file import path_from_root, find_root_path
+from scripts.common.get_font import get_font
 from scripts.log.card_log import CardLog
 from scripts.templates.draw_text import draw_left_justified_text, draw_right_justified_text
-from scripts.templates.generate_card_background import generate_card_background
+from scripts.templates.generators.backgorund.generate_card_background import generate_card_background
 from scripts.templates.generators.fields import field_generators
-from scripts.templates.get_font import get_font
 
 
-def get_random_template(root_path, side="front"):
-    templates_dir = os.path.join(root_path, 'assets', 'templates', side)
-    templates_dir = os.path.abspath(templates_dir)
+def get_random_template(side="front"):
+    templates_dir = path_from_root("./assets/templates", side)
     counter_file_path = os.path.join(templates_dir, 'counter.txt')
 
     if not os.path.exists(counter_file_path):
@@ -45,10 +45,11 @@ def get_random_template(root_path, side="front"):
     return template
 
 
-def write_fields(template, image, text_color, fonts_path, root_path, card_log):
+def write_fields(template, image, text_color, card_log):
     draw = ImageDraw.Draw(image, "RGBA")
 
     elements_bound_boxes = []
+    fonts_path = path_from_root("./assets/fonts")
 
     for element in template['elements']:
         element_type = element['type']
@@ -56,7 +57,7 @@ def write_fields(template, image, text_color, fonts_path, root_path, card_log):
 
         field_generator = field_generators.get(element_type, None)
 
-        field_data = field_generator(image=image, root_path=root_path, **element_parameters) if field_generator is not None else element['originalText']
+        field_data = field_generator(image=image, root_path=find_root_path(), **element_parameters) if field_generator is not None else element['originalText']
 
         x0, y0 = element['coordinates'][:2]
         # Calculate font size based on the element height
@@ -121,11 +122,10 @@ def write_fields(template, image, text_color, fonts_path, root_path, card_log):
     return elements_bound_boxes
 
 
-def render_template(width=900, height=540, root_path="..", side="front", fonts_path=None, palette=None, paint_order=None, color_profile=None, render_field=True, **_):
+def render_template(width=900, height=540, side="front", palette=None, paint_order=None, color_profile=None, render_field=True, **_):
     card_log = CardLog()
-    fonts_path = os.path.join(root_path, "assets/fonts") if fonts_path is None else fonts_path
 
-    template = get_random_template(root_path, side=side)
+    template = get_random_template(side=side)
     palette = palette if palette is not None else ColorPalette()
     card_log.palette = palette
 
@@ -145,8 +145,6 @@ def render_template(width=900, height=540, root_path="..", side="front", fonts_p
         template,
         card_image,
         text_color_hex,
-        fonts_path,
-        root_path,
         card_log
     ) if render_field else []
 
