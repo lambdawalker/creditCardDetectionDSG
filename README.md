@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project generates synthetic images of credit cards for training machine learning models, specifically using the
+This project generates synthetic images of credit cards for training machine learning models. We use the
 YOLOv8 object detection model. The images are generated using a Blender file that runs a Python script to create
 realistic scenes with varied conditions. The generated images are of size 800x800 in JPG format and are accompanied by
 the necessary annotation files for YOLOv8 and Hugging Face.
@@ -16,27 +16,30 @@ the necessary annotation files for YOLOv8 and Hugging Face.
 - **Annotation Files**: Generates annotation files compatible with YOLOv8 and Hugging Face in JSONL format.
 - **Card Background**: Generates different types of images to dress the credit card using Python.
 
-# Project Setup Guide for Credit Card Detection Dataset Generation
+# Setup Guide
 
 This guide outlines the streamlined process for setting up the project using Blender, which includes automatic
 environment creation and package installation:
 
-1. **Install Anaconda**:
+1. **Install Blender**:
+    - Download and install Blender from the official [Blender website](https://www.blender.org/download/).
+
+2. **Install Anaconda**:
     - Download and install Anaconda from [Anaconda's website](https://www.anaconda.com/download). Anaconda is necessary
       to manage the environments and dependencies for the project.
 
-2. **Clone the Repository**:
+3. **Clone the Repository**:
     - Clone the project using the command:
       ```
       git clone https://github.com/bytesWright/creditCardDetectionDSG.git
       ```
 
-3. **Initialize the Environment with Blender**:
+4. **Initialize the Environment with Blender**:
     - Open the Blender file named `generator.blend` and run the script `RUN-ME-FIRST-RUN-ME-ONCE`. This script
       automatically creates a new Anaconda environment tailored specifically for this project and installs the necessary
       dependencies using pip to ensure compatibility with Blender's Python interpreter.
 
-4. **Verify the Environment Setup**:
+5. **Verify the Environment Setup**:
     - After the initial environment setup, execute the `RUN-ME-SECOND` script located in the same Blender file. This
       script checks if the PIL library, a crucial dependency, is correctly installed in the Conda environment. This
       verification ensures that the environment is properly configured for synthetic dataset generation.
@@ -80,12 +83,12 @@ a detailed list of these scripts:
 
 ## YOLOv8
 
-The annotation files for YOLOv8 are generated as per the YOLOv8 dataset requirements. Each image will have a
+The annotation files for YOLOv8 are generated as per the [YOLOv8 dataset requirements](https://docs.ultralytics.com/datasets/detect/). Each image will have a
 corresponding .txt file with the bounding box coordinates.
 
 ## Hugging Face
 
-The annotation files for Hugging Face are generated in JSONL format as per the Hugging Face image dataset documentation.
+The annotation files for Hugging Face are generated in JSONL format as per the [Hugging Face image dataset documentation](https://huggingface.co/docs/datasets/en/image_dataset).
 
 # Links
 
