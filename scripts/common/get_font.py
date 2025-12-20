@@ -1,6 +1,6 @@
 from PIL import ImageFont
 
-from scripts.templates.get_all_font_files_by_thickness import get_random_font_path_by_thickness
+from scripts.common.get_all_font_files_by_thickness import get_random_font_path_by_thickness
 
 
 def get_font(fonts_path, font_size):
