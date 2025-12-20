@@ -1,7 +1,7 @@
 import cv2
 import random
 
-from scripts.generators import generate_monochromatic_chip
+from scripts.templates.generators.chip_generator import generate_monochromatic_chip
 
 chip_image = generate_monochromatic_chip(n=random.randint(2, 4), image_width=400, padding_percentage=0.05)
 
