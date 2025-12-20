@@ -1,4 +1,4 @@
-import os.path
+import os
 import subprocess
 from typing import List, Tuple, Optional
 
@@ -69,7 +69,7 @@ def create_conda_environment(env_name: str, python_version: str = '3.8', conda_p
         conda_packages.append("pip")
 
     command = ['conda', 'create', '--name', env_name, f'python={python_version}'] + conda_packages + ["-y"]
-    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
     if result.returncode != 0:
         raise Exception(f"Error creating Conda environment: {result.stderr}")
 
