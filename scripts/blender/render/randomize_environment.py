@@ -6,11 +6,12 @@ from scripts.blender.material.update import randomize_material_parameters_from_t
 from scripts.blender.randomize_light_properties import randomize_light_properties
 from scripts.blender.spatial.randomize_position_and_rotation import randomize_position_and_rotation
 from scripts.blender.spatial.randomize_position_in_donut import randomize_position_in_donut
+from scripts.common.file import path_from_root
 
 
-def randomize_environment(root):
+def randomize_environment():
     randomize_light()
-    randomize_table_material(root)
+    randomize_table_material()
     randomize_camera()
 
 
@@ -36,8 +37,8 @@ def randomize_light():
     light.location.y = pos_y
 
 
-def randomize_table_material(root):
-    file_path = f"{root}/assets/materials_randomization/Solar Panels.json"
+def randomize_table_material():
+    file_path = path_from_root("./assets/materials_randomization/Solar Panels.json")
     randomize_material_parameters_from_template(file_path)
 
 

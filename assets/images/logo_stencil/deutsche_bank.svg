@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.0"
+   width="48.736855"
+   height="48.790886"
+   id="svg2"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="deutsche_bank.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata
+     id="metadata22">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="5120"
+     inkscape:window-height="2054"
+     id="namedview20"
+     showgrid="false"
+     inkscape:zoom="2.16"
+     inkscape:cx="-147.4537"
+     inkscape:cy="24.074074"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1" />
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 22.790886 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="250 : 22.790886 : 1"
+       inkscape:persp3d-origin="125 : 14.124219 : 1"
+       id="perspective24" />
+  </defs>
+  <g
+     transform="translate(-374.44826,-274.36324)"
+     id="layer1"
+     style="fill:#000088;fill-opacity:1">
+    <g
+       transform="matrix(1.0806398,0,0,1.0806398,-170.89662,249.83272)"
+       id="g2420"
+       style="fill:#000088;fill-opacity:1">
+      <path
+         d="m 514.58,57.04 17.14,-23.51 h 8.101 L 522.68,57.04 Z M 504.65,22.7 h 45.1 v 45.15 h -45.1 z m 6.31,6.32 v 32.5 h 32.44 v -32.5 z"
+         id="path2384"
+         style="fill:#000088;fill-opacity:1;fill-rule:evenodd" />
+    </g>
+  </g>
+</svg>

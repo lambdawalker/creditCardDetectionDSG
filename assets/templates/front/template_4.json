@@ -1,0 +1,42 @@
+{
+  "extractedFrom": "template_1.jpg",
+  "type": "front",
+  "backgrounds": ["uniform"],
+  "elements": [
+    {
+      "type": "bankName",
+      "originalText": "BankOfAmerica",
+      "coordinates": [
+        0.08878350515463918,
+        0.11382113821138211,
+        0.4948453608247423,
+        0.21951219512195122
+      ],
+      "height": 0.10569105691056911
+    },
+    {
+      "type": "benefit",
+      "originalText": "CASH REWARDS",
+      "justified": "right",
+      "coordinates": [
+        0.9149484536082474,
+        0.4349593495934959
+      ],
+      "height": 0.08130081300813008
+    },
+    {
+      "type": "paymentNetworkLogo",
+      "parameters": {
+        "width": 0.12
+      },
+      "coordinates": [
+        0.85,
+        0.85
+      ]
+    }
+  ],
+  "formFactor": {
+    "height": 246
+  }
+}
+

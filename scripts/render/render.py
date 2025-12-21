@@ -10,12 +10,13 @@ from playwright.sync_api import sync_playwright
 from scripts.color.ColorPallet import ColorPalette
 from scripts.color.conversion import rgb_to_hex
 from scripts.color.text_color import best_text_color_from_palette
+from scripts.common.file import ensure_output_directory
 from scripts.log.Profiler import Profiler
 from scripts.log.card_log import CardLog
-from scripts.log.file import ensure_output_directory
+
 from scripts.render.LocalResourcesHandler import LocalResourceHandler
 from scripts.render.fields import gen
-from scripts.templates.generate_card_background import generate_card_background
+from scripts.templates.generators.backgorund.generate_card_background import generate_card_background
 
 handle_local_image = LocalResourceHandler()
 

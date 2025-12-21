@@ -9,7 +9,7 @@ def read_name_from_disk(root: str):
         return f.read().strip()
 
 
-def setup(root: str, env_name: str = None) -> None:
+def setup(root: str, env_name: str = None):
     """
     Configures the Python environment to use libraries from a specified Conda environment.
     This setup is particularly important when using Blender, which needs to access Python libraries managed by Conda.

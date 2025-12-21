@@ -1,6 +1,5 @@
 import math
 import mathutils
-from torch.fx.node import base_types
 
 from scripts.blender.spatial.randomize_position_and_rotation import randomize_position_and_rotation
 

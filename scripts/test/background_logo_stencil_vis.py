@@ -1,31 +1,6 @@
 from scripts.color.ColorPallet import ColorPalette
-from scripts.templates.convert_svg_to_png import prepare_svg_as_stencil
-
-
-
-def apply_stencil(image1, image2, stencil):
-    """
-    Apply a stencil image to overlay image2 onto image1.
-
-    Parameters:
-    image1 (PIL.Image): The base image.
-    image2 (PIL.Image): The image to overlay.
-    stencil (PIL.Image): The stencil image.
-
-    Returns:
-    PIL.Image: The resulting image after applying the stencil.
-    """
-    # Ensure the first two images are the same size
-    if image1.size != image2.size:
-        raise ValueError("The first two images must be of the same size.")
-
-    # Create a new image for the result
-    result = image1.copy()
-
-    # Paste the second image onto the first using the stencil as a mask
-    result.paste(image2, (0, 0), stencil)
-
-    return result
+from scripts.common.svg_stencil import prepare_svg_as_stencil, apply_stencil
+from scripts.templates.generators.backgorund.generate_card_background import generate_card_background
 
 
 def create_card_background_with_big_logo(svg_path, width, height):
@@ -43,13 +18,8 @@ def create_card_background_with_big_logo(svg_path, width, height):
     palette = ColorPalette()
     complementary_palette = ColorPalette(palette.get_complementary())
 
-    background_a = generate_random_uniform_background(
-        width=width, height=height, palette=palette
-    )
-
-    background_b = generate_random_uniform_background(
-        width=width, height=height, palette=complementary_palette
-    )
+    background_a = generate_card_background(palette, color_profile="uniform")
+    background_b = generate_card_background(complementary_palette, color_profile="uniform")
 
     stencil, bounding_box = prepare_svg_as_stencil(svg_path, width, height)
 
@@ -66,6 +36,7 @@ if __name__ == "__main__":
     width = 900
     height = 540
     result_image, bounding_box = create_card_background_with_big_logo(svg_path, width, height)
-    result_image.save('result.png')
+    result_image.show()
+    # result_image.save('result.png')
 
     print(f"Bounding box of the logo: {bounding_box}")

@@ -1,7 +1,7 @@
 {
   "extractedFrom": "template_1.jpg",
   "type": "front",
-  "backgrounds": ["Uniform"],
+  "backgrounds": ["uniform"],
   "elements": [
     {
       "type": "bankName",

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   aria-label="Capital One"
+   version="1.1"
+   viewBox="0 0 290.69534 149.98534"
+   id="svg3"
+   sodipodi:docname="capital_one.svg"
+   width="290.69534"
+   height="149.98534"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="3.1489935"
+     inkscape:cx="-26.198848"
+     inkscape:cy="85.741683"
+     inkscape:window-width="5120"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <path
+     d="m 287.7004,13.919847 c -28,-30.9 -208.599996,-3.1 -285.2999956,13.7 l -1.80000001,0.4 c -0.36256,0.09341 -0.61184,0.425787 -0.60000000333,0.8 0.0418000033,0.386457 0.43433000333,0.631817 0.80000000333,0.5 l 1.80000001,-0.3 c 63.5999996,-11.3 195.8999956,-27.0000005 224.2999956,1.2 8.7,8.6 9.1104,21.978267 -3.4,32.8 -35.60259,34.821427 -71.87243,59.837873 -114.2,85.200003 l -0.9,0.5 c -0.78135,0.32083 0.25404,1.74449 0.8,1.1 l 0.7,-0.4 c 39.16613,-20.29333 54.66097,-28.87152 94.3,-52.500003 69.6,-44.2 96,-69.2 83.5,-83 z"
+     fill="#cc2427"
+     id="path1"
+     sodipodi:nodetypes="cccccccscccccc" />
+</svg>

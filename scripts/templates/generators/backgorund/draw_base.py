@@ -1,9 +1,9 @@
-import os
 import random
 
 from PIL import ImageDraw, Image
 
 from scripts.color.generate_color import generate_random_shade_color
+from scripts.common.file import get_random_file
 from scripts.templates.generators.backgorund.draw_ordered_triangles import draw_ordered_triangles as draw_ordered_triangle_
 
 
@@ -87,24 +87,6 @@ def draw_random_image(image, primary_colors, complementary_colors, container_pat
     image.paste(img, (0, 0), img)
 
 
-def get_random_file(path=None, extension_filter=None):
-    extension_filter = extension_filter if extension_filter is not None else []
-    options = [os.path.join(path, f) for f in os.listdir(path)]
-
-    if len(extension_filter):
-        options = [
-            f for f in options
-            if os.path.splitext(f) in extension_filter or os.path.isdir(f)
-        ]
-
-    option = random.choice(options)
-
-    if os.path.isfile(option):
-        return option
-
-    return get_random_file(path=option)
-
-
 draw_fill_background_functions = {
     'draw_linear_gradient': draw_linear_gradient,
     'draw_radial_gradient': draw_radial_gradient,
@@ -117,5 +99,6 @@ draw_fill_background_functions_all = {
     'draw_radial_gradient': draw_radial_gradient,
     'draw_solid_color': draw_solid_color,
     'draw_ordered_triangles': draw_ordered_triangles,
+
     'draw_random_image': draw_random_image
 }

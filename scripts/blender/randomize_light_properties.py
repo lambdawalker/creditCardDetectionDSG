@@ -3,6 +3,8 @@ import random
 
 def randomize_light_properties(light, intensity_range=None, color_range=None, temperature_range=None):
     # Randomize intensity if range is provided
+    intensity = None
+
     if intensity_range is not None:
         intensity = random.uniform(intensity_range[0], intensity_range[1])
         light.data.energy = intensity

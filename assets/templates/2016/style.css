@@ -152,7 +152,7 @@ label {
     display: block;
     width: 23.81mm;
     height: 29.1mm;
-    border: 0.26mm solid #555;
+    /*border: 0.26mm solid #555;*/
     border-radius: 0.79mm;
     margin-top: 1.32mm;
 }
@@ -164,7 +164,7 @@ label {
     top: 15.88mm;
     width: 10.58mm;
     height: 13.23mm;
-    border: 0.26mm solid #aaa;
+    /*border: 0.26mm solid #aaa;*/
     border-radius: 0.53mm;
     z-index: 1;
 }

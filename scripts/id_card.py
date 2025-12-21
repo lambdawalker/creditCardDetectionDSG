@@ -6,7 +6,7 @@ from scripts.blender.render.randomize_environment import randomize_environment
 from scripts.blender.render.render_scene import render_scene
 from scripts.blender.render.spatial import randomize_card_position_and_rotation
 from scripts.blender.spatial.compute_pixel_bounding_box import compute_obj_pixel_bounding_box
-from scripts.log.file import ensure_output_directory
+from scripts.common.file import ensure_output_directory
 from scripts.log.vis_log import draw_bounding_boxes
 from scripts.log.yolo_log import create_yolo_description
 from scripts.render.render import render_template
@@ -14,7 +14,7 @@ from scripts.render_bulk import render_bulk
 
 
 def render_id_card(bucket_parameters, camera, image_index: int, output_path: str, root: str, scene):
-    randomize_environment(root)
+    randomize_environment()
 
     card_object_name = "card"
     card_object = bpy.data.objects.get(card_object_name)
@@ -71,12 +71,12 @@ def render_id_card(bucket_parameters, camera, image_index: int, output_path: str
 
 
 def render_data_set():
-    data_set_name = "IdCard_V_0_0_0"
+    data_set_name = "IdCardV0.2"
 
     distribution = [
         {"name": "train", "starting": 0, "limit": 1000},
-        {"name": "val", "starting": 0, "limit": 250},
-        {"name": "test", "starting": 0, "limit": 250}
+        {"name": "val", "starting": 0, "limit": 500},
+        {"name": "test", "starting": 0, "limit": 500}
     ]
 
     render_bulk(
