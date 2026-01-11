@@ -11,7 +11,6 @@ from scripts.common.file import path_from_root
 
 def randomize_environment():
     randomize_light()
-    randomize_table_material()
     randomize_camera()
 
 

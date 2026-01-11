@@ -1,6 +1,9 @@
 import bpy
 
 
+
+
+
 def purge_orphan_data():
     orphan_data_types = {
         "meshes": bpy.data.meshes,
