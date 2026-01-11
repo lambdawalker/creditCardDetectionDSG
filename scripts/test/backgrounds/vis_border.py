@@ -14,7 +14,3 @@ class TestBordersFromGenerateCardBackground(unittest.TestCase):
         )
 
         image.show()
-
-
-if __name__ == "__main__":
-    unittest.main()
