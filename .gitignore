@@ -142,3 +142,4 @@ e-pyver.env
 
 runs/
 *.blend1
+*.pt
