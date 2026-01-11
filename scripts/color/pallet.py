@@ -1,13 +1,9 @@
-import colorsys
 import random
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-def hsl_to_rgb(h, s, l):
-    r, g, b = colorsys.hls_to_rgb(h / 360.0, l / 100.0, s / 100.0)
-    return (r, g, b)
+from scripts.color.conversion import hsl_to_rgb
 
 
 def get_relative_luminance(h, s, l):
