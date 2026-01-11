@@ -7,7 +7,33 @@ from PIL import Image
 from scripts.common.convert_svg_to_png import get_svg_size, compute_stencil_scale_factor
 
 
-def prepare_svg_as_stencil(svg_path, canvas_width=None, canvas_height=None):
+def svg_to_png(path, size=None):
+    """
+    Convert an SVG file to a PNG image.
+
+    Parameters:
+    path (str): Path to the SVG file.
+    size (tuple): Optional (width, height) size for the output PNG. If None, keeps original size.
+
+    Returns:
+    PIL.Image: The converted PNG image.
+    """
+    if size is not None:
+        # Calculate scale to achieve the desired size
+        svg_size = get_svg_size(path)
+        target_width, target_height = size
+        scale_w = target_width / svg_size[0]
+        scale_h = target_height / svg_size[1]
+        scale = min(scale_w, scale_h)
+
+        png_data = cairosvg.svg2png(url=path, scale=scale)
+    else:
+        png_data = cairosvg.svg2png(url=path)
+
+    return Image.open(BytesIO(png_data))
+
+
+def prepare_svg_as_stencil(svg_path, canvas_width=None, canvas_height=None, position=None, size=None, scale_range=None):
     """
     Convert an SVG file to a PNG file and scale it to fit within the specified canvas size.
     The SVG will be placed at a random position inside the canvas.
@@ -17,36 +43,51 @@ def prepare_svg_as_stencil(svg_path, canvas_width=None, canvas_height=None):
     svg_path (str): Path to the SVG file.
     canvas_width (int): Width of the target canvas.
     canvas_height (int): Height of the target canvas.
+    position (tuple): Optional (x, y) position for the stencil. If None, position is random.
+    size (tuple): Optional (width, height) size for the stencil. If None, size is random based on scale_range.
+    scale_range (tuple): Optional (min, max) scale range. Defaults to (0.35, 0.95) if None.
 
     Returns:
     PIL.Image, tuple: The converted and scaled stencil image and the bounding box of the logo.
     """
-    try:
-        size = get_svg_size(svg_path)
-        scale = compute_stencil_scale_factor((canvas_width, canvas_height), size)
-        scale = scale * (random.random() * .6 + .35)
 
-        png_data = cairosvg.svg2png(url=svg_path, scale=scale)
-        stencil = Image.open(BytesIO(png_data))
+    svg_size = get_svg_size(svg_path)
 
-        stencil_width, stencil_height = stencil.size
+    # Determine scale
+    if size is not None:
+        # Calculate scale to achieve the desired size
+        target_width, target_height = size
+        scale_w = target_width / svg_size[0]
+        scale_h = target_height / svg_size[1]
+        scale = min(scale_w, scale_h)
+    else:
+        # Random scale within range
+        if scale_range is None:
+            scale_range = (0.35, 0.95)
+        base_scale = compute_stencil_scale_factor((canvas_width, canvas_height), svg_size)
+        scale = base_scale * (random.random() * (scale_range[1] - scale_range[0]) + scale_range[0])
 
+    png_data = cairosvg.svg2png(url=svg_path, scale=scale)
+    stencil = Image.open(BytesIO(png_data))
+
+    stencil_width, stencil_height = stencil.size
+
+    # Determine position
+    if position is not None:
+        pad_left, pad_top = position
+    else:
         # Generate random position
         pad_left = random.randint(0, canvas_width - stencil_width)
         pad_top = random.randint(0, canvas_height - stencil_height)
 
-        # Create a new image with the same size as canvas and paste the stencil at a random position
-        stencil_padded = Image.new("RGBA", (canvas_width, canvas_height), 0)  # Assuming stencil is grayscale (L mode)
-        stencil_padded.paste(stencil, (pad_left, pad_top))
+    # Create a new image with the same size as canvas and paste the stencil at a random position
+    stencil_padded = Image.new("RGBA", (canvas_width, canvas_height), 0)  # Assuming stencil is grayscale (L mode)
+    stencil_padded.paste(stencil, (pad_left, pad_top))
 
-        # Calculate bounding box
-        bounding_box = ((pad_left, pad_top), (pad_left + stencil_width, pad_top + stencil_height))
+    # Calculate bounding box
+    bounding_box = ((pad_left, pad_top), (pad_left + stencil_width, pad_top + stencil_height))
 
-        return stencil_padded, bounding_box
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None, None
+    return stencil_padded, bounding_box
 
 
 def apply_stencil(image, donor_image, stencil):
