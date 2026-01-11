@@ -26,7 +26,7 @@ color_selection = {
 }
 
 
-def generate_card_background(palette, width=900, height=540, paint_operation_cap=4, color_profile=None, paint_order=None, card_log: CardLog = None):
+def generate_card_background(palette, width=900, height=540, paint_operation_cap=3, color_profile=None, paint_order=None, card_log: CardLog = None):
     card_log = card_log if card_log is not None else CardLog()
 
     image = Image.new('RGBA', (width, height), (0, 0, 0, 0))

@@ -4,6 +4,7 @@ import random
 import numpy as np
 from PIL import ImageDraw, Image
 
+from scripts.color.generate_color import generate_random_shade_color
 from scripts.common.file import path_from_root, get_random_file
 from scripts.common.svg_stencil import prepare_svg_as_stencil, apply_stencil
 from scripts.templates.generators.backgorund.common import get_width_dependent_param
@@ -133,23 +134,19 @@ def draw_random_triangles(image, primary_colors, complementary_colors, **paramet
     return image
 
 
-def draw_parallel_lines(image, primary_colors, complementary_colors, **parameters):
+def draw_parallel_lines(image, primary_colors, complementary_colors, angle=None, thickness=None, spacing=None, opacity=255, **_):
     color = random.choice(primary_colors)
-    color = (*color, parameters.get("opacity", 255))
+    color = (*color, opacity)
 
     width, height = image.size
     transparent_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(transparent_layer, 'RGBA')
 
-    def random_thickness():
-        return random.randint(height // 40, height // 30)
+    angle = angle if angle is not None else random.uniform(0, math.pi)
+    thickness = thickness if thickness is not None else random.randint(height // 40, height // 30)
+    spacing = spacing if spacing is not None else 2 * thickness
 
-    def random_spacing():
-        return random.randint(20, 40)
-
-    angle = random.uniform(0, math.pi)
-    spacing = random_spacing()
-    thickness = random_thickness()
+    print(f"angle: {angle}, thickness: {thickness}, spacing: {spacing} <<")
 
     for i in range(-height, width + height, spacing):
         x1 = i
@@ -181,6 +178,7 @@ def draw_solid_big_logo(image, primary_colors, complementary_colors, **parameter
 
 def draw_random_circles(image, primary_colors, complementary_colors, **parameters):
     color = random.choice(primary_colors)
+    color = generate_random_shade_color(color, .10)
     color = (*color, parameters.get("opacity", 255))
 
     width, height = image.size
@@ -209,6 +207,33 @@ def draw_random_circles(image, primary_colors, complementary_colors, **parameter
     return image
 
 
+def draw_grid_dots(image, primary_colors, complementary_colors, **parameters):
+    color = random.choice(primary_colors)
+    color = generate_random_shade_color(color, .10)
+    color = (*color, parameters.get("opacity", 255))
+
+    width, height = image.size
+    transparent_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(transparent_layer, "RGBA")
+
+    def random_dot_size():
+        return random.randint(height // 80, height // 30)
+
+    def random_spacing():
+        return random.randint(height // 20, height // 8)
+
+    dot_size = random_dot_size()
+    spacing = random_spacing()
+
+    for x in range(0, width + spacing, spacing):
+        for y in range(0, height + spacing, spacing):
+            draw.ellipse(
+                [(x - dot_size, y - dot_size), (x + dot_size, y + dot_size)],
+                fill=color,
+            )
+
+    image.paste(transparent_layer, (0, 0), transparent_layer)
+    return image
 
 
 draw_details_functions = {
@@ -219,4 +244,5 @@ draw_details_functions = {
     'draw_parallel_lines': draw_parallel_lines,
     'draw_solid_big_logo': draw_solid_big_logo,
     'draw_random_circles': draw_random_circles,
+    'draw_grid_dots': draw_grid_dots,
 }
