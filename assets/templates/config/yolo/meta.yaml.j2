@@ -1,0 +1,19 @@
+Train size: {{ train_size }}
+Val size: {{ val_size }}
+Test size: {{ test_size }}
+
+Classes:
+    Id card
+
+Training command running from the root of the project:
+    yolo detect train data={{ data_set_metadata_path }} model=yolo11n.yaml epochs={{ epochs }} imgsz={{ image_size }}
+
+Command to export as tflite bellow:
+    yolo export model={{ best_model_path }} format=tflite
+
+Command to test:
+    yolo detect predict model={{ best_model_path }}  source={{ post_training_test_path }}
+
+{{ Notes }}
+
+For more info: https://docs.ultralytics.com/
