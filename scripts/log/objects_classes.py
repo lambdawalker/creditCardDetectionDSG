@@ -1,4 +1,4 @@
-classes_to_ids = {
+asses_to_ids = {
     "creditCardFront": 0,
     "creditCardBack": 1,
     "text": 2,
