@@ -4,9 +4,9 @@ import os
 import subprocess
 import threading
 
+import yaml
+from lambdawaker.dataset.DiskDataset import DiskDataset
 from rich.progress import Progress, BarColumn, TextColumn, TimeElapsedColumn, TimeRemainingColumn, SpinnerColumn, MofNCompleteColumn
-
-from scripts.ImageSequence import ImageSequence
 
 
 def start_blender_instance(progress, task_id, blender_path, blend_file, script_path, data, restart_every=80):
@@ -20,7 +20,6 @@ def start_blender_instance(progress, task_id, blender_path, blend_file, script_p
     while completed_total < chunk_size:
         # Update data for the current 'restart' segment
         # We need to tell the Blender script where to resume for each bucket
-        current_offset_in_chunk = 0
         temp_data = json.loads(json.dumps(data))  # Deep copy
 
         remaining_to_skip = completed_total
@@ -61,9 +60,9 @@ def start_blender_instance(progress, task_id, blender_path, blend_file, script_p
                 full_output.append(line)
                 line_clean = line.strip()
 
-                if task_id == 5:
+                if task_id == 1:
                     pass
-                    #print(f"W{task_id}>" ,line_clean, end="\n")
+                    # print(f"W{task_id}>", line_clean, end="\n")
 
                 if "Traceback" in line_clean or "Error:" in line_clean:
                     has_python_error = True
@@ -220,18 +219,27 @@ def split_workload_with_offsets(metadata, n):
 
 
 def main(instances=8):
-    id_dataset = ImageSequence("Y:/ai/datasets/local/plain_idV0.0.5/img")
-    dataset_size = len(id_dataset)
+    dataset_name = "IdCardV0.6"
+
+    # Read classes.yaml
+    with open("classes.yaml", "r") as f:
+        classes = yaml.safe_load(f)
+
+    main_data_source = DiskDataset("@DS/ds.plain_idV1.0.0")
+    dataset_size = len(main_data_source)
 
     buckets = yolo_splits(dataset_size)
     buckets_per_process = split_workload_with_offsets(buckets, instances)
+
     print(f"Working Directory: {os.getcwd()}")
     print(f"Dataset Size: {dataset_size}")
 
     jobs = [
         {
             "wd": os.getcwd(),
-            "buckets": bpp, "total_size": dataset_size
+            "buckets": bpp, "total_size": dataset_size,
+            "dataset_name": dataset_name,
+            "classes": classes
         } for bpp in buckets_per_process
     ]
 

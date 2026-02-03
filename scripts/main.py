@@ -1,11 +1,10 @@
 import os.path
-import random
 from types import SimpleNamespace
 
 import bpy
 import bpy
+from lambdawaker.dataset.DiskDataset import DiskDataset
 
-from scripts.ImageSequence import ImageSequence
 from scripts.id_card import render_id_simple_card
 
 
@@ -13,21 +12,12 @@ def setup_memory_optimized_settings():
     bpy.context.preferences.edit.use_global_undo = False
 
 
-def main(wd, buckets, total_size):
-    dataset_name = "IdCardV0.5"
+def main(wd, buckets, dataset_name, classes, **kwargs):
+    main_data_source = DiskDataset("@DS/ds.plain_idV1.0.0")
+    background_ds = DiskDataset("@DS/indoorsV2")
 
-    id_ds = ImageSequence("Y:/ai/datasets/local/plain_idV0.0.5/img")
-    background_ds = ImageSequence("Y:/ai/datasets/local/indoorsV2/img")
     root = os.path.join(wd, "output", dataset_name)
 
-    # render_id_simple_card(
-    #     "TEST",
-    #     random.randint(0, total_size - 1),
-    #     root,
-    #     id_ds,
-    #     background_ds
-    # )
-    #
     setup_memory_optimized_settings()
 
     for progress_info in progress_generator(buckets):
@@ -35,8 +25,9 @@ def main(wd, buckets, total_size):
             progress_info.bucket_name,
             progress_info.index,
             root,
-            id_ds,
-            background_ds
+            main_data_source,
+            background_ds,
+            classes
         )
 
 
@@ -63,6 +54,5 @@ def progress_generator(buckets):
             )
             local_count += 1
             print(f"PROGRESS:{local_count}", flush=True)
-            # cleanup_after_render()
 
 

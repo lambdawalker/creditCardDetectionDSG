@@ -28,6 +28,6 @@ setup_path()
 
 from scripts.main import main  # dont move
 
-print(">>>>>>")
+# Passing all arguments from JSON to the main function
 data = get_json_args()
 main(**data)

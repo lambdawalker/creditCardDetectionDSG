@@ -1,7 +1,5 @@
-from scripts.log.objects_classes import classes_to_ids
 
-
-def translate_to_hugging_face_format(data, file_name):
+def translate_to_hugging_face_format(data, file_name, classes_to_ids):
     translated_data = {
         "file_name": file_name,
         "objects": {

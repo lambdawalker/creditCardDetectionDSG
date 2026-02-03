@@ -21,7 +21,7 @@ def draw_bounding_boxes(image_path, annotations, output_path):
         font = ImageFont.load_default()
 
     for annotation in annotations:
-        bbox_type = annotation["type"]
+        bbox_type = annotation["class"]
         x0, y0, x1, y1 = annotation["boundingBox"]
 
         # Draw the bounding box
