@@ -575,7 +575,7 @@ class MRP_UL_NodeList(UIList):
         if self.layout_type in {'DEFAULT', 'COMPACT'}:
             row = layout.row(align=True)
             row.prop(node, "randomizer_enabled", text="")
-            row.label(text=node.name, icon='NODE')
+            row.label(text=f"{node.name} - {node.bl_label or node.type}", icon='NODE')
             # Indicate if node has locked properties
             has_locked = any(s.randomizer_props.is_locked for s in node.inputs if hasattr(s, "randomizer_props"))
             if has_locked:
@@ -584,50 +584,47 @@ class MRP_UL_NodeList(UIList):
             layout.alignment = 'CENTER'
             layout.label(text="")
 
+    def draw_filter(self, context, layout):
+        pass
+
     def filter_items(self, context, data, propname):
         nodes = getattr(data, propname)
         mat = context.object.active_material
-
-        # Default flags (include everything)
         flt_flags = [self.bitflag_filter_item] * len(nodes)
         flt_neworder = []
 
         if not mat: return flt_flags, flt_neworder
 
-        # 1. Filter by Name (Search)
+        # 1. Filter by Display Name (Search)
         if mat.randomizer_search:
-            flt_flags = bpy.types.UI_UL_list.filter_items_by_name(
-                mat.randomizer_search,
-                self.bitflag_filter_item,
-                nodes,
-                "name"
-            )
+            search_term = mat.randomizer_search.lower()
+            for i, node in enumerate(nodes):
+                display_name = (node.label if node.label else node.bl_label).lower()
+                if search_term not in display_name:
+                    flt_flags[i] &= ~self.bitflag_filter_item
 
         # 2. Sorting
-        # Enumerate to keep track of original indices
         items = [(i, node) for i, node in enumerate(nodes)]
         sort_mode = mat.randomizer_sort_by
 
         if sort_mode == 'NAME':
-            items.sort(key=lambda x: x[1].name.lower())
+            items.sort(key=lambda x: (x[1].label if x[1].label else x[1].bl_label).lower())
         elif sort_mode == 'TYPE':
-            # Primary: Label/Type, Secondary: Name
             items.sort(key=lambda x: (x[1].bl_label.lower(), x[1].name.lower()))
         elif sort_mode == 'ACTIVE':
-            # Enabled first (True < False in reverse, or use 'not enabled' for ascending)
-            items.sort(key=lambda x: (not x[1].randomizer_enabled, x[1].name.lower()))
+            # FIX: Use 'not enabled' for descending order (True/Enabled at top)
+            items.sort(key=lambda x: (not x[1].randomizer_enabled, (x[1].label if x[1].label else x[1].bl_label).lower()))
         elif sort_mode == 'LOCKED':
-            # Nodes with LOCKED sockets first
-            def get_lock_score(n):
-                return any(s.randomizer_props.is_locked for s in n.inputs if hasattr(s, "randomizer_props"))
-
-            # Sort: Locked (True) before Unlocked (False) -> use 'not' for ascending default
-            items.sort(key=lambda x: (not get_lock_score(x[1]), x[1].name.lower()))
+            def get_lock_score(n): return any(s.randomizer_props.is_locked for s in n.inputs if hasattr(s, "randomizer_props"))
+            items.sort(key=lambda x: (not get_lock_score(x[1]), (x[1].label if x[1].label else x[1].bl_label).lower()))
 
         if mat.randomizer_sort_reverse:
             items.reverse()
 
-        flt_neworder = [x[0] for x in items]
+        # FIX: The crucial mapping step. flt_neworder[old_index] = new_index
+        flt_neworder = [0] * len(nodes)
+        for new_idx, (old_idx, _) in enumerate(items):
+            flt_neworder[old_idx] = new_idx
 
         return flt_flags, flt_neworder
 
