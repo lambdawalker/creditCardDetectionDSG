@@ -1,21 +1,26 @@
-import gc
 import os
+import random
 
-from PIL import Image
 import bpy
+from PIL import Image
+from lambdawaker.blender.find_materials import find_materials_by_regex
+from lambdawaker.blender.images.assign_image_to_texture import assign_image_to_texture
+from lambdawaker.blender.material.randomize import randomize_material
+from lambdawaker.blender.material.update import set_material_to_mesh
+from lambdawaker.blender.query.get_scene_and_camera import get_scene_and_camera
+from lambdawaker.blender.render.randomize_environment import randomize_environment
+from lambdawaker.blender.render.render_scene import render_scene
+from lambdawaker.blender.render.spatial import randomize_card_position_and_rotation
+from lambdawaker.blender.spatial.compute_pixel_bounding_box import compute_obj_pixel_bounding_box
 from lambdawaker.file.path.ensure_directory import ensure_directory_for_file
 
-from scripts.blender.images.assign_image_to_texture import assign_image_to_texture
-from scripts.blender.query.get_scene_and_camera import get_scene_and_camera
-from scripts.blender.render.randomize_environment import randomize_environment
-from scripts.blender.render.render_scene import render_scene
-from scripts.blender.render.spatial import randomize_card_position_and_rotation
-from scripts.blender.spatial.compute_pixel_bounding_box import compute_obj_pixel_bounding_box
+
+
 from scripts.log.vis_log import draw_bounding_boxes
 from scripts.log.yolo_log import create_yolo_description
 
 
-def render_id_simple_card(bucket_name, global_index: int, output_path: str, id_ds, background_ds, classes):
+def render_id_simple_card(bucket_name, global_index: int, output_path: str, id_ds, photo_id_ds, background_ds, classes):
     to_clean = []
     scene, camera = get_scene_and_camera()
 
@@ -29,7 +34,7 @@ def render_id_simple_card(bucket_name, global_index: int, output_path: str, id_d
 
     record = id_ds[global_index]
 
-    id_card_image_pil = record.image
+    id_card_image_pil = record.image.to_pil()
     to_clean.append(id_card_image_pil)
     objects_info = record.objects[0]
     object_class = objects_info["class"]
@@ -38,42 +43,61 @@ def render_id_simple_card(bucket_name, global_index: int, output_path: str, id_d
         card_object, object_class=object_class
     )
 
+    photo_id = objects_info["photo_id"]
+
+    photo_record = photo_id_ds[photo_id]
+    photo_image_pil = photo_record.image.to_pil()
+
     if objects_info["class"] == "vertical_card":
         id_card_image_pil = id_card_image_pil.rotate(-90, expand=1)
-        id_card_image_pil.save("test.jpg")
+        photo_image_pil = photo_image_pil.rotate(-90, expand=1)
+
+    subtype = objects_info["subtype"]
+    possible_materials = find_materials_by_regex(f"{subtype}.*") + find_materials_by_regex("df.*")
+
+    material = random.choice(possible_materials)
+    set_material_to_mesh(card_object_name, material)
 
     id_card_image_blender = assign_image_to_texture(
-        "simple",
-        "id_image_layer",
+        material,
+        "color_img",
         id_card_image_pil
     )
 
+    hologram_image_blender = assign_image_to_texture(
+        material,
+        "hologram_img",
+        photo_image_pil
+    )
+
+    randomize_material(material, random.randint(0, 99999999999))
+
     to_clean.append(id_card_image_blender)
+    to_clean.append(hologram_image_blender)
 
     mod_index = global_index % len(background_ds)
-    background_image_pil = background_ds[mod_index].image
+    print(f"Using background {mod_index}")
+
+    background_image_pil = background_ds[mod_index].image.to_pil()
     to_clean.append(background_image_pil)
 
-    background_image_blender, bg_image_blender = randomize_environment(background_image_pil)
-
-    to_clean.append(background_image_blender)
-    to_clean.append(bg_image_blender)
+    to_clean = to_clean + randomize_environment(background_image_pil)
 
     ensure_directory_for_file(output_file)
     render_scene(output_file)
-
-    id_card_image_blender.buffers_free()
-    background_image_blender.buffers_free()
-    bg_image_blender.buffers_free()
 
     background_image_pil.close()
     id_card_image_pil.close()
 
     for data in to_clean:
-        if isinstance(data, Image.Image):
+        if data is None:
+            continue
+        elif isinstance(data, Image.Image):
             data.close()
         elif isinstance(data, bpy.types.Image):
+            data.buffers_free()
             bpy.data.images.remove(data, do_unlink=True)
+
 
     bpy.context.view_layer.update()
     bpy.data.orphans_purge(do_recursive=True)
