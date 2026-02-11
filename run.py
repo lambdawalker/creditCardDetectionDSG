@@ -60,7 +60,7 @@ def start_blender_instance(progress, task_id, blender_path, blend_file, script_p
 
                 if task_id == 1:
                     pass
-                    # print(f"W{task_id}>", line_clean, end="\n")
+                    print(f"W{task_id}>", line_clean, end="\n")
 
                 if "Traceback" in line_clean or "Error:" in line_clean:
                     has_python_error = True
@@ -215,7 +215,7 @@ def split_workload_with_offsets(metadata, n):
 
 
 def main(instances=8):
-    dataset_name = "IdCardV0.7"
+    dataset_name = "IdCardV0.8"
 
     # Read classes.yaml
     with open("classes.yaml", "r") as f:
