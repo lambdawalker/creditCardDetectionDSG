@@ -7,13 +7,14 @@ bl_info = {
     "description": "Advanced material randomization with Texture Swapping, ColorRamps, and Smart Group Limits. Includes internal preset storage and list filtering.",
     "category": "Material",
 }
-
+import gpu
+import blf
 import colorsys
 import json
+import math
+import os
 import random
 import zlib
-import os
-import math
 
 import bpy
 from bpy.props import (
@@ -615,7 +616,9 @@ class MRP_UL_NodeList(UIList):
             # FIX: Use 'not enabled' for descending order (True/Enabled at top)
             items.sort(key=lambda x: (not x[1].randomizer_enabled, (x[1].label if x[1].label else x[1].bl_label).lower()))
         elif sort_mode == 'LOCKED':
-            def get_lock_score(n): return any(s.randomizer_props.is_locked for s in n.inputs if hasattr(s, "randomizer_props"))
+            def get_lock_score(n):
+                return any(s.randomizer_props.is_locked for s in n.inputs if hasattr(s, "randomizer_props"))
+
             items.sort(key=lambda x: (not get_lock_score(x[1]), (x[1].label if x[1].label else x[1].bl_label).lower()))
 
         if mat.randomizer_sort_reverse:
@@ -1143,6 +1146,7 @@ classes = (
 )
 
 
+
 def register():
     for cls in classes: bpy.utils.register_class(cls)
     bpy.types.NodeSocket.randomizer_props = PointerProperty(type=RandomizerSocketProps)
@@ -1181,6 +1185,7 @@ def register():
     bpy.types.Material.randomizer_prop_sort_reverse = BoolProperty(name="Reverse", default=False)
 
 
+
 def unregister():
     for cls in reversed(classes): bpy.utils.unregister_class(cls)
     del bpy.types.NodeSocket.randomizer_props
@@ -1196,6 +1201,8 @@ def unregister():
     del bpy.types.Material.randomizer_prop_search
     del bpy.types.Material.randomizer_prop_sort_by
     del bpy.types.Material.randomizer_prop_sort_reverse
+
+
 
 
 if __name__ == "__main__": register()
