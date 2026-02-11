@@ -60,7 +60,7 @@ def start_blender_instance(progress, task_id, blender_path, blend_file, script_p
 
                 if task_id == 1:
                     pass
-                    print(f"W{task_id}>", line_clean, end="\n")
+                    #print(f"W{task_id}>", line_clean, end="\n")
 
                 if "Traceback" in line_clean or "Error:" in line_clean:
                     has_python_error = True
