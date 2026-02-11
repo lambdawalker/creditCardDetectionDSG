@@ -25,12 +25,10 @@ def start_blender_instance(progress, task_id, blender_path, blend_file, script_p
         remaining_to_skip = completed_total
 
         for bucket in temp_data["buckets"]:
-            # If we've already finished this bucket in previous runs, set size to 0
             if remaining_to_skip >= bucket['size']:
                 remaining_to_skip -= bucket['size']
                 bucket['size'] = 0
             else:
-                # Adjust the start offset and reduce size by what we've already done
                 bucket['start'] = bucket.get('start', 0) + remaining_to_skip
                 bucket['size'] -= remaining_to_skip
                 remaining_to_skip = 0
@@ -68,8 +66,6 @@ def start_blender_instance(progress, task_id, blender_path, blend_file, script_p
                     has_python_error = True
 
                 if line_clean.startswith("PROGRESS:"):
-                    # Assuming PROGRESS: value is absolute to the CURRENT sub-process run
-                    # or relative to the start of the script
                     val = int(float(line_clean.split(":")[1]))
 
                     # Track incremental progress
@@ -219,13 +215,13 @@ def split_workload_with_offsets(metadata, n):
 
 
 def main(instances=8):
-    dataset_name = "IdCardV0.6"
+    dataset_name = "IdCardV0.7"
 
     # Read classes.yaml
     with open("classes.yaml", "r") as f:
         classes = yaml.safe_load(f)
 
-    main_data_source = DiskDataset("@DS/ds.plain_idV1.0.0")
+    main_data_source = DiskDataset("@DS/ds.plain_id")
     dataset_size = len(main_data_source)
 
     buckets = yolo_splits(dataset_size)
@@ -252,4 +248,5 @@ def main(instances=8):
 
 
 if __name__ == "__main__":
+    print("Starting main function...")
     main()
