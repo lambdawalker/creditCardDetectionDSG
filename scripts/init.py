@@ -3,6 +3,7 @@ import os
 import sys
 
 import bpy
+from lambdawalker.blender.conda import env
 
 
 def setup_path():
@@ -10,9 +11,8 @@ def setup_path():
     if root not in sys.path:
         sys.path.append(root)
 
-    from project import environment  # don't move
 
-    environment.setup(root)
+    env.setup(root)
     return root
 
 

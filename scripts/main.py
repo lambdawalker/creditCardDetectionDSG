@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 import bpy
 import bpy
-from lambdawaker.dataset.DiskDataset import DiskDataset
+from lambdawalker.dataset.DiskDataset import DiskDataset
 
 from scripts.id_card import render_id_simple_card
 

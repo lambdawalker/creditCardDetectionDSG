@@ -5,7 +5,7 @@ import subprocess
 import threading
 
 import yaml
-from lambdawaker.dataset.DiskDataset import DiskDataset
+from lambdawalker.dataset.DiskDataset import DiskDataset
 from rich.progress import Progress, BarColumn, TextColumn, TimeElapsedColumn, TimeRemainingColumn, SpinnerColumn, MofNCompleteColumn
 
 
