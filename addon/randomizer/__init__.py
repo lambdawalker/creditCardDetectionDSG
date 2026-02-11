@@ -1,6 +1,6 @@
 bl_info = {
-    "name": "Material Randomizer Pro (HSV + Features)",
-    "author": "Gemini AI",
+    "name": "Material Randomizer Pro",
+    "author": "lambdawalker@isdavid.com",
     "version": (1, 10, 0),
     "blender": (4, 0, 0),
     "location": "Node Editor > Sidebar > Randomizer",

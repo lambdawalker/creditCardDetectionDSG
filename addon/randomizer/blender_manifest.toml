@@ -1,0 +1,12 @@
+schema_version = "1.0.0"
+id = "randomizer"
+name = "Material Randomizer Pro"
+version = "1.10.0"
+blender_version_min = "4.0.0"
+license = ["SPDX:GPL-2.0-or-later"]
+author = "lambdawalker@isdavid.com"
+maintainer = "lambdawalker@isdavid.com"
+description = "Advanced material randomization with Texture Swapping, ColorRamps, and Smart Group Limits."
+tagline = "Material Randomization Tools"
+category = "Material"
+type = "add-on"
