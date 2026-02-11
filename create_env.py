@@ -1,3 +1,4 @@
-from project.environment import create
+from lambdawaker.blender.conda.create import create_blender_env
 
-create()
+create_blender_env()
+
